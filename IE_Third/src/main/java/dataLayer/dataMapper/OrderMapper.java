@@ -17,8 +17,8 @@ public class OrderMapper {
                 con1.createStatement();
 //        st.executeUpdate("CREATE TABLE IF NOT EXISTS " + "user" + " " + "(userId TEXT PRIMARY KEY, firstName TEXT," +
 //                " firstname TEXT, gpa FLOAT)");
-        st.executeUpdate("    Create Table IF NOT EXISTS\n" +
-                "                order (\n" +
+        st.executeUpdate("Create Table IF NOT EXISTS\n" +
+                "                order1 (\n" +
                 "                        orderId VARCHAR(20) PRIMARY KEY,\n" +
                 "                        firstName VARCHAR(100),\n" +
                 "                        lastName VARCHAR(100),\n" +
@@ -45,9 +45,9 @@ public class OrderMapper {
     }
     protected String getInsertStatement() {
 
-        return "insert into order (orderId, firstName, lastName, weight, waterProof, garanti, goodCamera, shortEdge, smallSizeToCanBeInPacket" +
+        return "insert into order1 (orderId, firstName, lastName, weight, waterProof, garanti, goodCamera, shortEdge, smallSizeToCanBeInPacket" +
                 ",color, screenSize, ramSize, numOfCamera, backCameraResolution, charger, cover, headphone, wirelessCharger, antiScratch)\n" +
-                " Select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? Where not exists(select * from user where orderId=?)";
+                " Select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? Where not exists(select * from order1 where orderId=?)";
     }
     public void insertOrder(Order order) throws SQLException {
         int orderId = new Random(1000000).nextInt() + 1;

@@ -32,11 +32,13 @@
         if(element.equals("color"))
             order.setColor((String)request.getAttribute("color"));
         if(element.equals("screen"))
-            order.setScreenSize((Long) request.getAttribute("screen"));
+            order.setScreenSize(Double.parseDouble((String) request.getAttribute("screen")));
         if(element.equals("ram"))
-            order.setRamSize((Integer) request.getAttribute("ram"));
-        if(element.equals("back"))
-            order.setBackCameraResolution((Integer) request.getAttribute("back"));
+            order.setRamSize(Integer.parseInt((String) request.getAttribute("ram")));
+        if(element.equals("back")) {
+            order.setBackCameraResolution(Integer.parseInt(((String) request.getAttribute("back")).split("_")[1]));
+            order.setNumOfCamera(Integer.parseInt(((String) request.getAttribute("back")).split("_")[0]));
+        }
         System.out.println(element + " " + request.getParameter(element));
     }
 

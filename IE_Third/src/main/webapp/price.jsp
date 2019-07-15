@@ -42,7 +42,7 @@
         System.out.println(element + " " + request.getParameter(element));
     }
     OrderMapper orderMapper = new OrderMapper();
-
+    orderMapper.insertOrder(order);
 %>
 <body>
 <h1 style="background-color: brown; color: azure"><%=EntUtil.getInstatnce().getMakeYourPhone().getPriceDescription()%></h1>
