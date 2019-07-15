@@ -1,7 +1,5 @@
-<%@ page import="model.User.User" %>
-<%@ page import="model.Repo.GetRepo" %>
+<%@ page import="model.EntUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
@@ -20,6 +18,9 @@
             margin: 5px 5px 5px 5px;
             text-align: center;
         }
+        body{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -27,17 +28,16 @@
     <%--GetRepo.print("homePage.jsp");--%>
     <%--User user = (User) request.getAttribute("user");--%>
 <%--%>--%>
-<c:out value="${GetRepo.print(\"homePage.jsp\")}" />
-<form action="showAllUsersCtrl" method="GET">
-    <button>مشاهده تمام کاربران</button>
-</form>
-<form action="showAllProjects" method="GET">
-    <button>مشاهده تمام پروژه ها</button>
-</form>
-<form action="userOwnPage.jsp" method="GET">
-    <button>پروفایل</button>
-</form>
+<% EntUtil entUtil = EntUtil.getInstatnce();%>
+<h1 style="color: brown"><%= entUtil.getFirstDescription()%></h1>
 <%--<h2 style="color: blue;"><%=user.getFirstName() + " " + user.getLastName()%> خوش آمدی </h2>--%>
-<h2 style="color: blue;"><c:out value="${user.getFirstName()} ${user.getLastName()}" /> خوش آمدی </h2>
+<br>
+<h2><%= entUtil.getFirstQuest()%></h2>
+<form action="questions.jsp" method="GET">
+    <button style="width: 100px; height: 50px; background-color: brown; color: azure; font-size: 20px; display: inline; cursor: pointer;" type="submit">بله</button>
+</form>
+<form action="yourPhone.jsp" method="GET">
+    <button style="width: 100px; height: 50px; background-color: brown; color: azure; font-size: 20px; display: inline; cursor: pointer" type="submit">خیر</button>
+</form>
 </body>
 </html>

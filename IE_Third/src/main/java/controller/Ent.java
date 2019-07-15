@@ -1,7 +1,7 @@
 package controller;
 
-import model.Repo.UsersRepo;
-import model.User.User;
+import model.EntUtil;
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet("/showAllUsersCtrl")
-public class ShowAllUsersCtrl extends HttpServlet {
+@WebServlet(name = "ent", urlPatterns = "/")
+public class Ent extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<User> users = UsersRepo.getInstance().getAllUsers();
-        request.setAttribute("users", users);
-        request.setAttribute("loginUser", UsersRepo.getInstance().getLoginUser());
-        request.getRequestDispatcher("showAllUsers.jsp").forward(request, response);
+        try {
+            JSONObject jsonObject = (JSONObject) EntUtil.getHTML("https://api.myjson.com/bins/e2udt");
+            EntUtil entUtil = new EntUtil(jsonObject);
+            System.out.println("good");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
