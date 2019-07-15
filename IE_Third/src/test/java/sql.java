@@ -1,53 +1,19 @@
-package dataLayer.dataMapper;
-
 import dataLayer.DBCPDBConnectionPool;
+import dataLayer.dataMapper.OrderMapper;
 import model.Order;
+import org.junit.Test;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Random;
 
-public class OrderMapper {
-    public OrderMapper() throws SQLException {
-        Connection con1 = DBCPDBConnectionPool.getConnection();
-        Statement st =
-                con1.createStatement();
-//        st.executeUpdate("CREATE TABLE IF NOT EXISTS " + "user" + " " + "(userId TEXT PRIMARY KEY, firstName TEXT," +
-//                " firstname TEXT, gpa FLOAT)");
-        st.executeUpdate("Create Table IF NOT EXISTS\n" +
-                "                order1 (\n" +
-                "                        orderId Integer PRIMARY KEY,\n" +
-                "                        firstName VARCHAR(100),\n" +
-                "                        lastName VARCHAR(100),\n" +
-                "                        weight BOOLEAN ,\n" +
-                "                        waterProof BOOLEAN,\n" +
-                "                        garanti BOOLEAN,\n" +
-                "                        goodCamera BOOLEAN,\n" +
-                "                        shortEdge BOOLEAN,\n" +
-                "                        smallSizeToCanBeInPacket BOOLEAN,\n" +
-                "                        color VARCHAR(100) ,\n" +
-                "                        screenSize REAL ,\n" +
-                "                        ramSize Integer,\n" +
-                "                        numOfCamera INTEGER ,\n" +
-                "                        backCameraResolution INTEGER ,\n" +
-                "                        charger BOOLEAN,\n" +
-                "                        cover BOOLEAN,\n" +
-                "                        headphone BOOLEAN,\n" +
-                "                        wirelessCharger BOOLEAN,\n" +
-                "                        antiScratch BOOLEAN\n" +
-                "                )");
-
-        st.close();
-        con1.close();
-    }
-    protected String getInsertStatement() {
-
-        return "insert into order1 (orderId, firstName, lastName, weight, waterProof, garanti, goodCamera, shortEdge, smallSizeToCanBeInPacket" +
-                ",color, screenSize, ramSize, numOfCamera, backCameraResolution, charger, cover, headphone, wirelessCharger, antiScratch)\n" +
-                " Select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? Where not exists(select * from order1 where orderId=?)";
+public class sql {
+    @Test
+    public void insert() throws SQLException {
+        OrderMapper orderMapper = new OrderMapper();
+        Order order = Order.getInstance();
+        insertOrder(order);
     }
     public void insertOrder(Order order) throws SQLException {
         int orderId = new Random(1000000).nextInt() + 1;
@@ -105,5 +71,11 @@ public class OrderMapper {
         con.close();
 
 
+    }
+    protected String getInsertStatement() {
+
+        return "insert into order1 (orderId, firstName, lastName, weight, waterProof, garanti, goodCamera, shortEdge, smallSizeToCanBeInPacket" +
+                ",color, screenSize, ramSize, numOfCamera, backCameraResolution, charger, cover, headphone, wirelessCharger, antiScratch)\n" +
+                " Select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? Where not exists(select * from order1 where orderId=?)";
     }
 }
